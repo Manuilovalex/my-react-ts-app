@@ -928,3 +928,18 @@ body {
     font-size: 2rem;
   }
 }
+
+@media (max-width: 800px) {
+.loading {
+  font-size: 2rem;
+  text-align: center;
+  position: fixed;
+  top: 77%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: loading 1s infinite;
+}
+}
+
+
+
