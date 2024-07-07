@@ -584,7 +584,7 @@ body {
 
 .todo {
   display: flex;
-  align-items: center; /* Changed from baseline to center */
+  align-items: center;
   gap: 20px;
   background-color: #ffffff;
   padding: 20px;
@@ -593,9 +593,8 @@ body {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease-in-out;
   user-select: none;
-  flex-wrap: wrap; /* Added to allow wrapping */
-  overflow: hidden; /* Added to handle overflow */
-  width: 100%; /* Ensure it takes the full width of the container */
+  flex-wrap: wrap;
+  overflow: hidden;
 }
 
 .todo:hover {
