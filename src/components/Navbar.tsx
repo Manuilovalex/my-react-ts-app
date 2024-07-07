@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import { NavLink } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+import { NavLink, useLocation } from 'react-router-dom'
 import { LinkInterface, NAVBAR_LINKS } from '../data/mockData.ts'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../redux/store.ts'
@@ -12,6 +12,7 @@ const Navbar = () => {
   const { isLogin } = useSelector((state: RootState) => state.auth)
   const [modalOpen, setModalOpen] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
+  const location = useLocation()
 
   const handleLogin = () => {
     setModalOpen(true)
@@ -24,6 +25,10 @@ const Navbar = () => {
   const toggleMenu = () => {
     setMenuOpen(!menuOpen)
   }
+
+  useEffect(() => {
+    setMenuOpen(false)
+  }, [location])
 
   return (
     <nav className="navbar">
@@ -41,7 +46,9 @@ const Navbar = () => {
                 {link.name}
               </NavLink>
             ) : (
-              <span className="navbar__link disabled">{link.name}</span>
+              <span className="navbar__link disabled" onClick={handleLogin}>
+                {link.name}
+              </span>
             )}
           </li>
         ))}
