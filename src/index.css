@@ -914,3 +914,9 @@ body {
     height: auto;
   }
 }
+
+@media (max-width: 800px) {
+  .todo__title {
+    font-size: 1rem;
+  }
+}
