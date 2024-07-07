@@ -1,28 +1,39 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { TodoProviderPropsInterface } from '../../types/todo/TodoProviderProps.interface.ts'
 import { TodoInterface } from '../../types/todo/Todo.interface.ts'
-import { MOCK_TODOS } from '../../data/mockData.ts'
 import { TodoContext } from '../../context/TodoContext.ts'
+import { MOCK_TODOS } from '../../data/mockData.ts'
 
 const TodoProvider = ({ children }: TodoProviderPropsInterface) => {
-  const [todos, setTodos] = useState<TodoInterface[]>(MOCK_TODOS)
-  const [nextId, setNextId] = useState<number>(
-    MOCK_TODOS.length ? Math.max(...MOCK_TODOS.map((todo) => todo.id)) + 1 : 1
-  )
+  const [todos, setTodos] = useState<TodoInterface[]>(() => {
+    const savedTodos = localStorage.getItem('todos')
+    return savedTodos ? JSON.parse(savedTodos) : MOCK_TODOS
+  })
+
+  const [nextId, setNextId] = useState<number>(() => {
+    const savedTodos = localStorage.getItem('todos')
+    const todos: TodoInterface[] = savedTodos ? JSON.parse(savedTodos) : MOCK_TODOS
+    return todos.length ? Math.max(...todos.map((todo) => todo.id)) + 1 : 1
+  })
+
+  useEffect(() => {
+    localStorage.setItem('todos', JSON.stringify(todos))
+  }, [todos])
 
   const addTodo = (todo: Omit<TodoInterface, 'id'>) => {
     const newTodo = { ...todo, id: nextId }
-    setTodos([...todos, newTodo])
-    setNextId(nextId + 1)
+    setTodos((prevTodos) => [...prevTodos, newTodo])
+    setNextId((prevNextId) => prevNextId + 1)
   }
 
   const deleteTodo = (id: number) => {
-    setTodos(todos.filter((todo) => todo.id !== id).map((todo, index) => ({ ...todo, id: index + 1 })))
-    setNextId(todos.length)
+    const updatedTodos = todos.filter((todo) => todo.id !== id).map((todo, index) => ({ ...todo, id: index + 1 }))
+    setTodos(updatedTodos)
+    setNextId(todos.length + 1)
   }
 
   const toggleTodo = (id: number) => {
-    setTodos(todos.map((todo) => (todo.id === id ? { ...todo, completed: !todo.completed } : todo)))
+    setTodos((prevTodos) => prevTodos.map((todo) => (todo.id === id ? { ...todo, completed: !todo.completed } : todo)))
   }
 
   const deleteAllTodos = () => {

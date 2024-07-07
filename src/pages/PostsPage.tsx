@@ -24,7 +24,7 @@ const PostsPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
 
   useEffect(() => {
-    dispatch(fetchAllPosts('https://jsonplaceholder.typicode.com/posts?_limit=15') as any)
+    dispatch(fetchAllPosts('https://jsonplaceholder.typicode.com/posts?_limit=5') as any)
   }, [dispatch])
 
   const handleAddPost = () => {

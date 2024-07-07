@@ -24,7 +24,7 @@ const Users = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
 
   useEffect(() => {
-    dispatch(fetchAllUsers('https://jsonplaceholder.typicode.com/users') as any)
+    dispatch(fetchAllUsers('https://jsonplaceholder.typicode.com/users?_limit=5') as any)
   }, [dispatch])
 
   const handleAddUser = (newUser: Partial<UserInterface>) => {
