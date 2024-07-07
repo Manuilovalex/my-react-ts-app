@@ -417,6 +417,8 @@ input:hover {
   border-radius: 15px;
   width: 80%;
   max-width: 500px;
+  max-height: 80vh;
+  overflow-y: auto;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   position: fixed;
   top: 50%;
