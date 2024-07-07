@@ -414,7 +414,6 @@ input:hover {
 .modal {
   background: white;
   padding: 20px;
-  border-radius: 15px;
   width: 80%;
   max-width: 500px;
   max-height: 80vh;
