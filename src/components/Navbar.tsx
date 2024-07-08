@@ -54,13 +54,13 @@ const Navbar = () => {
         ))}
         {!isLogin ? (
           <li className="navbar__item">
-            <button className="navbar__link" onClick={handleLogin}>
+            <button className="navbar__link navbar__link--login" onClick={handleLogin}>
               Login
             </button>
           </li>
         ) : (
           <li className="navbar__item">
-            <button className="navbar__link" onClick={handleLogout}>
+            <button className="navbar__link navbar__link--logout" onClick={handleLogout}>
               Logout
             </button>
           </li>
